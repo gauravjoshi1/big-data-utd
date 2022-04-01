@@ -55,5 +55,4 @@ ratings_matrix = first_matrix_input.multiply(second_matrix_input)
 
 # extract the rating vectors
 ratings_rdd = ratings_matrix.rows.map(lambda ele: (ele.index, ele.vector.toArray().tolist()))
-ratings = spark.createDataFrame(ratings_rdd)
-ratings.write.save('/FileStore/Output6') 
+ratings_rdd.coalesce(1).saveAsTextFile("/FileStore/Output_6")
